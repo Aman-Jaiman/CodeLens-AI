@@ -5,11 +5,18 @@ import { Button } from '@/components/ui/Button';
 
 export function OptimizedCode({ code, language, onApply }) {
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(code);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1600);
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setCopyFailed(false);
+      window.setTimeout(() => setCopied(false), 1600);
+    } catch {
+      setCopyFailed(true);
+      window.setTimeout(() => setCopyFailed(false), 2200);
+    }
   };
 
   return (
@@ -22,11 +29,11 @@ export function OptimizedCode({ code, language, onApply }) {
           </h3>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="secondary" size="sm" onClick={handleCopy}>
+          <Button variant="secondary" size="sm" onClick={handleCopy} disabled={!code}>
             {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-            {copied ? 'Copied' : 'Copy'}
+            {copied ? 'Copied' : copyFailed ? 'Copy failed' : 'Copy'}
           </Button>
-          <Button size="sm" onClick={onApply}>
+          <Button size="sm" onClick={onApply} disabled={!code}>
             Apply to editor
           </Button>
         </div>

@@ -10,7 +10,17 @@
   "scripts": {
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
-    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server run start"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "overrides": {
+    "monaco-editor": {
+      "dompurify": "3.4.13"
+    }
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

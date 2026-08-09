@@ -40,6 +40,8 @@ export function DashboardPage() {
   };
 
   const handleReview = async () => {
+    if (loading) return;
+
     if (!code.trim()) {
       setError('Please paste or write some code before running an AI review.');
       return;
@@ -77,7 +79,7 @@ export function DashboardPage() {
               Select your language, edit code in Monaco, and click Run AI Review to detect bugs, analyze complexity, and get optimized code.
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="hidden flex-wrap gap-2 lg:flex">
             <Button variant="secondary" size="sm" onClick={handleReset}>
               <RotateCcw className="h-4 w-4" />
               Reset Sample
@@ -179,7 +181,7 @@ export function DashboardPage() {
                     <div className="grid gap-3 sm:grid-cols-1">
                       <ScoreCard
                         label="Overall Health"
-                        score={result.score || 85}
+                        score={result.score ?? 85}
                         max={100}
                         trend={result.score >= 80 ? 'Excellent' : result.score >= 60 ? 'Needs Improvement' : 'Refactor Recommended'}
                       />

@@ -7,8 +7,10 @@
     "start": "node server.js",
     "dev": "node --watch server.js"
   },
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
-    "ai-code-reviewer": "file:..",
     "axios": "^1.7.9",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
