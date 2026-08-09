@@ -64,7 +64,7 @@ export function DashboardPage() {
     <div className="min-h-screen pb-16">
       <Navbar />
 
-      <main className="mx-auto max-w-[1400px] px-4 pt-24 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-350 px-4 pt-24 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -145,7 +145,7 @@ export function DashboardPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.98 }}
                 >
-                  <GlassCard className="flex min-h-[380px] flex-col items-center justify-center text-center">
+                  <GlassCard className="flex min-h-95 flex-col items-center justify-center text-center">
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{ repeat: Infinity, duration: 2, ease: 'linear' }}
@@ -219,7 +219,7 @@ export function DashboardPage() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <GlassCard className="flex min-h-[380px] flex-col justify-center">
+                  <GlassCard className="flex min-h-95 flex-col justify-center">
                     <p className="text-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">Ready</p>
                     <h2 className="mt-2 font-display text-2xl font-semibold text-bright">
                       Run AI review to generate insights
