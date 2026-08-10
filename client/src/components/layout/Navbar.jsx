@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Menu, X, Sparkles, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { useTheme } from '@/utils/theme';
 
 const links = [
   { href: '/#features', label: 'Features' },
@@ -16,6 +17,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const onDashboard = location.pathname.startsWith('/dashboard');
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -71,6 +73,21 @@ export function Navbar() {
         )}
 
         <div className="hidden items-center gap-3 md:flex">
+          {/* Dark / Bright Mode Toggle */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-line bg-white/5 text-bright transition hover:bg-white/10 hover:border-cyan-400/40"
+            title={theme === 'dark' ? 'Switch to Bright Mode' : 'Switch to Dark Mode'}
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? (
+              <Sun className="h-4 w-4 text-amber-300" />
+            ) : (
+              <Moon className="h-4 w-4 text-cyan-500" />
+            )}
+          </button>
+
           {!onDashboard ? (
             <Link to="/dashboard">
               <Button size="sm">Open Dashboard</Button>
@@ -84,14 +101,30 @@ export function Navbar() {
           )}
         </div>
 
-        <button
-          type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-white/5 text-bright md:hidden"
-          onClick={() => setOpen((value) => !value)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          {/* Mobile Theme Toggle Button */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-white/5 text-bright"
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? (
+              <Sun className="h-4 w-4 text-amber-300" />
+            ) : (
+              <Moon className="h-4 w-4 text-cyan-500" />
+            )}
+          </button>
+
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-white/5 text-bright"
+            onClick={() => setOpen((value) => !value)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>

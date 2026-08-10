@@ -1,5 +1,6 @@
 import Editor from '@monaco-editor/react';
 import { Loader2 } from 'lucide-react';
+import { useTheme } from '@/utils/theme';
 
 export function CodeEditor({
   value,
@@ -7,14 +8,18 @@ export function CodeEditor({
   onChange,
   height = '480px',
   readOnly = false,
+  theme,
 }) {
+  const { theme: currentTheme } = useTheme();
+  const activeTheme = theme || (currentTheme === 'light' ? 'light' : 'vs-dark');
+
   return (
-    <div className="overflow-hidden rounded-2xl border border-line bg-[#0a0f1a]">
+    <div className="overflow-hidden rounded-2xl border border-line bg-[var(--color-panel)] transition-colors duration-300">
       <Editor
         height={height}
         language={language}
         value={value}
-        theme="vs-dark"
+        theme={activeTheme}
         loading={
           <div className="flex h-[420px] items-center justify-center gap-2 text-sm text-muted">
             <Loader2 className="h-4 w-4 animate-spin text-cyan-300" />

@@ -5,6 +5,26 @@
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-panel: var(--color-panel);
+  --color-panel-elevated: var(--color-panel-elevated);
+  --color-line: var(--color-line);
+  --color-muted: var(--color-muted);
+  --color-soft: var(--color-soft);
+  --color-bright: var(--color-bright);
+  --color-cyan: var(--color-cyan);
+  --color-teal: var(--color-teal);
+  --color-emerald: var(--color-emerald);
+  --color-amber: var(--color-amber);
+  --color-rose: var(--color-rose);
+  --color-sky: var(--color-sky);
+
+  --shadow-glow: 0 0 60px rgba(34, 211, 238, 0.18);
+  --shadow-card: var(--shadow-card);
+}
+
+:root {
   --color-ink: #070b14;
   --color-ink-soft: #0b1220;
   --color-panel: #111827;
@@ -19,9 +39,61 @@
   --color-amber: #fbbf24;
   --color-rose: #fb7185;
   --color-sky: #38bdf8;
-
-  --shadow-glow: 0 0 60px rgba(34, 211, 238, 0.18);
   --shadow-card: 0 24px 80px rgba(0, 0, 0, 0.45);
+  --bg-gradient: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 211, 238, 0.14), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(45, 212, 191, 0.08), transparent),
+    radial-gradient(ellipse 50% 30% at 0% 100%, rgba(56, 189, 248, 0.08), transparent),
+    #070b14;
+  --glass-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  --glass-editor-bg: #0a0f1a;
+}
+
+html.dark {
+  --color-ink: #070b14;
+  --color-ink-soft: #0b1220;
+  --color-panel: #111827;
+  --color-panel-elevated: #172033;
+  --color-line: rgba(148, 163, 184, 0.16);
+  --color-muted: #94a3b8;
+  --color-soft: #cbd5e1;
+  --color-bright: #f8fafc;
+  --color-cyan: #22d3ee;
+  --color-teal: #2dd4bf;
+  --color-emerald: #34d399;
+  --color-amber: #fbbf24;
+  --color-rose: #fb7185;
+  --color-sky: #38bdf8;
+  --shadow-card: 0 24px 80px rgba(0, 0, 0, 0.45);
+  --bg-gradient: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 211, 238, 0.14), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(45, 212, 191, 0.08), transparent),
+    radial-gradient(ellipse 50% 30% at 0% 100%, rgba(56, 189, 248, 0.08), transparent),
+    #070b14;
+  --glass-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  --glass-editor-bg: #0a0f1a;
+}
+
+html.light {
+  --color-ink: #f8fafc;
+  --color-ink-soft: #ffffff;
+  --color-panel: #ffffff;
+  --color-panel-elevated: #f1f5f9;
+  --color-line: rgba(15, 23, 42, 0.12);
+  --color-muted: #64748b;
+  --color-soft: #334155;
+  --color-bright: #0f172a;
+  --color-cyan: #0284c7;
+  --color-teal: #0d9488;
+  --color-emerald: #059669;
+  --color-amber: #d97706;
+  --color-rose: #e11d48;
+  --color-sky: #0284c7;
+  --shadow-card: 0 20px 50px rgba(15, 23, 42, 0.08);
+  --bg-gradient: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(14, 165, 233, 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(20, 184, 166, 0.10), transparent),
+    radial-gradient(ellipse 50% 30% at 0% 100%, rgba(56, 189, 248, 0.10), transparent),
+    #f8fafc;
+  --glass-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.90), rgba(241, 245, 249, 0.80));
+  --glass-editor-bg: #ffffff;
 }
 
 @layer base {
@@ -40,13 +112,10 @@
     min-height: 100vh;
     font-family: var(--font-sans);
     color: var(--color-bright);
-    background:
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 211, 238, 0.14), transparent),
-      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(45, 212, 191, 0.08), transparent),
-      radial-gradient(ellipse 50% 30% at 0% 100%, rgba(56, 189, 248, 0.08), transparent),
-      var(--color-ink);
+    background: var(--bg-gradient);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background 0.3s ease, color 0.3s ease;
   }
 
   ::selection {
@@ -73,37 +142,26 @@
   }
 
   .glass {
-    background: linear-gradient(
-      145deg,
-      rgba(255, 255, 255, 0.07),
-      rgba(255, 255, 255, 0.02)
-    );
+    background: var(--glass-bg);
     border: 1px solid var(--color-line);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     box-shadow: var(--shadow-card);
+    transition: background 0.3s ease, border-color 0.3s ease;
   }
 
   .glass-soft {
-    background: rgba(17, 24, 39, 0.55);
+    background: var(--color-ink-soft);
     border: 1px solid var(--color-line);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #f8fafc 0%, #22d3ee 45%, #34d399 100%);
+    background: linear-gradient(135deg, var(--color-bright) 0%, var(--color-cyan) 50%, var(--color-emerald) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-  }
-
-  .grid-bg {
-    background-image:
-      linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
   }
 
   .scrollbar-thin {
@@ -164,14 +222,14 @@
   .markdown-body code {
     font-family: var(--font-mono);
     font-size: 0.85em;
-    background: rgba(34, 211, 238, 0.12);
+    background: rgba(14, 165, 233, 0.12);
     color: var(--color-cyan);
     padding: 0.15rem 0.4rem;
     border-radius: 0.35rem;
   }
 
   .markdown-body pre {
-    background: rgba(7, 11, 20, 0.85);
+    background: var(--color-ink-soft);
     border: 1px solid var(--color-line);
     border-radius: 0.85rem;
     padding: 1rem;
